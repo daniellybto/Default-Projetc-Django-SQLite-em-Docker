@@ -12,7 +12,12 @@ if ! [ -d "$PROJETO_NAME" ]; then
   echo "A pasta do projeto não existe, criando-a então..."
   django-admin startproject ${PROJETO_NAME} .
 
-  ls -lha
+  # verificar se o settings.py da versão do Django já inclui o import do módulo 'os'
+  # ele verifica apenas nas 25 primeiras linhas do arquivo
+  if ! head -n 25 ${PROJETO_NAME}/settings.py | grep -q "import os"; then
+    #caso não exista esse import no arquivo ele irá adicionar na primeira linha do arquivo
+    sed -i '1s/^/import os\n/' ${PROJETO_NAME}/settings.py
+  fi
 
   # Substituindo os dados de SECRET_KEY definidos no .env:
   sed -i "s/^SECRET_KEY = .*/SECRET_KEY = os.getenv('SECRET_KEY', 'aft4ecef3af')/" ${PROJETO_NAME}/settings.py
