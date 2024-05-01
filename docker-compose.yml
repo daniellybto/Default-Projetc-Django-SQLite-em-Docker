@@ -1,0 +1,18 @@
+services:
+  web_django:
+    container_name: escola-DjangoAPI-Study
+    image: djangoapi:teste
+    env_file:
+    - ./conf/.env
+    build:
+      context: .
+      args:
+        user: djangouser # usuário definido que irá ser criado no container (esse argumento será repassado para o Dockerfile) 
+    volumes:
+      - ./app/:/usr/src/app/
+    ports:
+      - "8800:8000"
+    expose:
+      - "8000"
+    command: ["/usr/src/entrypoint.sh"]
+

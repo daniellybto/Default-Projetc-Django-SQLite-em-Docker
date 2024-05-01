@@ -1,0 +1,8 @@
+*/venv/
+*.db
+*.sql.gz
+.cache
+.project
+.idea
+.git/
+Dockerfile
