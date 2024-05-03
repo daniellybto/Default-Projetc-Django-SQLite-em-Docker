@@ -111,6 +111,33 @@ docker exec -it escola-DjangoAPI-Study python manage.py migrate --noinput
 docker exec -it escola-DjangoAPI-Study python manage.py migrate --noinput
 ```
 ---
+
+####  Instalando novos pacotes usando o `pip install `:
+Para rodar esse comando acesse via terminal (ash, bash ou sh) ou rode o comando direto:
+
+```bash
+# relembrando, você pode acessar o terminal dentro do container:
+# caso esteja usando uma imagem `alpine` use o `ash`
+# no meu caso:
+docker exec -it escola-DjangoAPI-Study ash
+# e após isso rodar o comando de pip install
+$ pip install [PACOTE-A-SER-INSTALADO]
+
+# ou você pode rodar o pip install sem acessar o terminal do container:
+# no meu caso vou instalar o pacote `pillow`
+docker exec -it escola-DjangoAPI-Study pip install pillow
+```
+---
+####  Gerando o arquivo `requirements.txt`de seu projeto com o `pip freeze`:
+Você também pode gerar a lista de pacotes necessários para sua aplicação rodar certinho... 
+
+Para isso você pode usar o `pip freeze`
+
+```bash
+docker exec -it escola-DjangoAPI-Study pip freeze > requirements.txt
+```
+---
+
 ####  Parar todos os Containers em execução:
 
 

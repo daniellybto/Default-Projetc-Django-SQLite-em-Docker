@@ -28,7 +28,11 @@ WORKDIR /usr/src/app
 # instala os pacotes necessários para a aplicação Django rodar e constrói a pasta `data/` que será um dos volumes utilizado pelo container
 RUN pip install -r requirements.txt && \
     chmod -R 755 /usr/src/app && \
-    chown -R $user:$user /usr/src/app
+    chown -R $user:$user /usr/src/app && \
+    # o fato de eu criar uma pasta do usuário vai permitir com que este usuário instale pacotes usando o `pip instal ...` sem precisar reconstruir a imagem
+    mkdir /home/$user && \
+    chmod -R 755 /home/$user && \
+    chown $user:$user /home/$user
 
 # definindo o usuário que irá 'iniciar' o docker:
 USER $user
